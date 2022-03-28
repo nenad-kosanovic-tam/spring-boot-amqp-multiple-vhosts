@@ -1,9 +1,10 @@
 POST localhost:8080/messages
+X-Unity-Content-Language: de-CH
 
 some nice message!
 
 ###
 
-POST localhost:8080/messages/test-host
+POST localhost:8080/messages/custom-virtual-host
 
 some nice message!

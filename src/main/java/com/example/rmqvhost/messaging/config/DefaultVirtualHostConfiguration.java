@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultVirtualHostConfiguration {
 
-    public static final String V_HOST = "custom-virtual-host";
+    public static final String V_HOST = "/";
 
     @Value("${rmq.host}")
     private String host;
@@ -28,7 +28,7 @@ public class DefaultVirtualHostConfiguration {
     @Bean
     public ConnectionFactory defaultConnectionFactory() {
         var connFactory = new CachingConnectionFactory(host, port);
-        connFactory.setVirtualHost("/");
+        connFactory.setVirtualHost(V_HOST);
         connFactory.setUsername(username);
         connFactory.setPassword(password);
         return connFactory;

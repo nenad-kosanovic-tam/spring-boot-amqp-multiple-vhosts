@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomVirtualHostConfiguration {
 
-    public static final String V_HOST = "/";
+    public static final String V_HOST = "custom-virtual-host";
 
     @Value("${rmq.host}")
     private String host;
