@@ -15,7 +15,6 @@ public class GlobalConfiguration {
 
     @Autowired
     private ConnectionFactory defaultConnectionFactory;
-
     @Autowired
     private ConnectionFactory customVirtualHostConnectionFactory;
 

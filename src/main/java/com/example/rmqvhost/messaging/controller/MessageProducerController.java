@@ -1,9 +1,12 @@
 package com.example.rmqvhost.messaging.controller;
 
 import com.example.rmqvhost.messaging.config.DefaultVirtualHostConfiguration;
-import com.example.rmqvhost.messaging.service.MessageProducer;
+import com.example.rmqvhost.messaging.model.Message;
+import com.example.rmqvhost.messaging.producer.MessageProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 import static com.example.rmqvhost.messaging.consumer.MessageListeners.EXCHANGE_NAME;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -17,14 +20,18 @@ public class MessageProducerController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void sendMessage(@RequestBody String message) {
-        messageProducer.send(EXCHANGE_NAME, "fromController", DefaultVirtualHostConfiguration.V_HOST, message);
+    public void sendMessage(@RequestBody Message message) {
+        messageProducer.send(DefaultVirtualHostConfiguration.V_HOST, getMessage(message));
     }
 
     @PostMapping("/{vHost}")
     @ResponseStatus(CREATED)
-    public void sendMessage(@PathVariable String vHost, @RequestBody String message) {
-        messageProducer.send(EXCHANGE_NAME, "fromController", vHost, message);
+    public void sendMessage(@PathVariable String vHost, @RequestBody Message message) {
+        messageProducer.send(vHost, getMessage(message));
 
+    }
+
+    private String getMessage(Message message) {
+        return Optional.ofNullable(message).map(Message::getText).orElse("Empty message!");
     }
 }

@@ -1,4 +1,4 @@
-package com.example.rmqvhost.messaging.service;
+package com.example.rmqvhost.messaging.producer;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,11 +18,10 @@ public class MessageProducer {
     /**
      * Send message to RabbitMQ.
      *
-     * @param routingKey routing key for sending the message
-     * @param exchange   rabbitMq exchange
-     * @param message    message to be sent
+     * @param vHost   virtual host
+     * @param message message to be sent
      */
-    public void send(final String routingKey, final String exchange, final String vHost, final String message) {
+    public void send(final String vHost, final String message) {
         try {
             SimpleResourceHolder.bind(rabbitMessagingTemplate.getRabbitTemplate().getConnectionFactory(), vHost);
             rabbitMessagingTemplate.convertAndSend(EXCHANGE_NAME, "fromController", message);
