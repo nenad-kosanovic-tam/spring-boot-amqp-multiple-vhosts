@@ -1,6 +1,6 @@
 # spring-boot-amqp-multiple-vhosts
 
-Example how we can use two diffrent RabbitMQ virtual hosts, with same user on same service.
+Example how we can use two different RabbitMQ virtual hosts, with same user on same service.
 
 More details could be found here:
 
